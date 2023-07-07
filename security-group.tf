@@ -1,4 +1,4 @@
-
+# create security group, expose port 22, 80, and 443
 resource "aws_security_group" "webserver_sg" {
   name        = "webserver-sg"
   description = "Allow TLS inbound traffic"
