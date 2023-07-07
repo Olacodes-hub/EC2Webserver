@@ -4,7 +4,7 @@ provider "aws" {
 
 }
 
-
+# create s3 iam role
 resource "aws_iam_role" "s3_role" {
   name = "S3AccessRole"
 
@@ -24,16 +24,19 @@ resource "aws_iam_role" "s3_role" {
 EOF
 }
 
+# attach s3 role to s3 policy
 resource "aws_iam_role_policy_attachment" "s3_policy_attachment" {
   role       = aws_iam_role.s3_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 }
 
+# create iam instance profile
 resource "aws_iam_instance_profile" "example" {
   name = "S3AccessProfile"
   role = aws_iam_role.s3_role.name
 }
 
+# create ec2 instance
 resource "aws_instance" "example" {
   ami           = var.AMI  # Replace with the desired AMI ID
   instance_type = var.instance_type     # Replace with the desired instance type
