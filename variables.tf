@@ -1,4 +1,4 @@
-
+# create variables
 variable "instance_type" {
     description = "webserver"
     default = "t2.micro"
